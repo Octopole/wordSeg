@@ -137,7 +137,7 @@ def wdjoin(wd):
                     checker = 0
                 wd = tmp
     wd = dullkiller(wd)
-    print(wd)
+    #print(wd)
 
     """link connect words to its nerborhoods"""
     for i in connectorlist:
@@ -156,7 +156,7 @@ def wdjoin(wd):
                     tmp = wd[:index-1] + [wd[index-1] + wd[index]]
                 wd = tmp 
     wd = dullkiller(wd)
-    print(wd)
+    #print(wd)
 
     """checking not complete parentheses or others"""
     kvp = pairtracerlist.items()
@@ -190,7 +190,7 @@ def wdjoin(wd):
                 tmp += [addwd] + wd[j[0]+len(j):]
                 wd = tmp
     wd = dullkiller(wd)
-
+    #print(wd)
     return wd
 
 #-----------string toolbox-------------
@@ -399,7 +399,7 @@ def segment(text, dicfile):
         seg_list = linetolist(line)
         seg_list = wdjoin(seg_list)
         dic = listtodic(seg_list, linecount)
-        #print(seg_list)
+        #print(dic)
         if len(dic) != 0:
             linecount += 1
             put = json.dumps(dic, indent=4, ensure_ascii=False)
