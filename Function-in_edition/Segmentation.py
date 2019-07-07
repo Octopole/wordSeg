@@ -17,7 +17,7 @@ import re
 
 #Word cutting
 seperatorlist = ["mm", "MM", '"', ".", 'pcs', "(", ")", "+", "-", ":", "_", "/", "=", "x", "X"]
-addtoleftlist = [")", '"', "mm", "MM", "pcs", 't']
+addtoleftlist = [")", '"', "mm", "MM", "pcs"]
 connectorlist = ["+", "-", ":", "_", "/", "(", ".", "=", "x", "X"]
 pairtracerlist = {"(": ")"}
 #date matching
@@ -134,10 +134,10 @@ def wdjoin(wd):
                 if not index<1:
                     tmp = wd[:index-1] + [wd[index-1] + wd[index]] + wd[index+1:]
                 elif index==0:
-                    tmp = wd
-                wd = tmp 
+                    checker = 0
+                wd = tmp
     wd = dullkiller(wd)
-    #print(wd)
+    print(wd)
 
     """link connect words to its nerborhoods"""
     for i in connectorlist:
@@ -148,7 +148,7 @@ def wdjoin(wd):
             except ValueError:
                 checker=0
             else:
-                if not index<1 and not index>len(wd)-1:
+                if not index<1 and not index>len(wd)-2:
                     tmp = wd[:index-1] + [wd[index-1] + wd[index] + wd[index+1]] + wd[index+2:]
                 elif index==0:
                     tmp = [wd[0] + wd[1]] + wd[2:]
@@ -156,7 +156,7 @@ def wdjoin(wd):
                     tmp = wd[:index-1] + [wd[index-1] + wd[index]]
                 wd = tmp 
     wd = dullkiller(wd)
-    #print(wd)
+    print(wd)
 
     """checking not complete parentheses or others"""
     kvp = pairtracerlist.items()
@@ -346,13 +346,13 @@ def segment(text, dicfile):
     try:
         f3=open(dicfile, encoding='utf-8')
     except FileNotFoundError:
-        print(dicfile,"can't be opened, something wrong!")
-        exit(1)
+        # dictfile can't be opened, something wrong!
+        return('{"docs":"字典文件读取失败"}')
     else:
         addinfo = f3.read()
         f3.close()
         if isJson(addinfo):
-            print("Building dictionary using:", dicfile)
+            #print("Building dictionary using:", dicfile)
             adddic = json.loads(addinfo)
             if 'T' in adddic:
                 TSOWlist += adddic['T']
@@ -372,43 +372,41 @@ def segment(text, dicfile):
                 MASOWlist += adddic['Material']
             if 'Flange' in adddic:
                 FlSOWlist += adddic['Flange']
-            print("Finish building dictionary.")
+            #print("Finish building dictionary.")
         else:
-            return("Fail adding info to dictionay, format wrong!")
+            # Fail adding info to dictionay, format wrong!
+            return('{"docs":"字典格式错误"}')
 
-    # try:
-    #     f=open(sys.argv[1], encoding='utf-8')
-    # except FileNotFoundError:
-    #     print(sys.argv[1],"can't be opened, something wrong!")
-    # else:
-    #     pass
-
-    #line= f.readline()
     result = ""
 
-    #f2=open("output.json", "w+", encoding='utf-8')
-    result += '{"docs":"This is currently blank.",\n"datas":\n['
+    result += '{"docs":"",\n"origindatas":['
     linecount = 0
-    #while line:
 
+    for line in text:
+        linecount += 1
+        line = strQ2B(line)
+        if line[-1] == "\n":
+            line = line[:-1]
+        result += "\"" + str(line) + "\""
+        if linecount != len(text):
+            result += ","
+
+    result += '],\n"datas":\n['
+
+    linecount = 0
     for line in text:
         line = strQ2B(line)
         seg_list = linetolist(line)
         seg_list = wdjoin(seg_list)
         dic = listtodic(seg_list, linecount)
-        print(seg_list)
-        #line = " ".join(line)
+        #print(seg_list)
         if len(dic) != 0:
             linecount += 1
             put = json.dumps(dic, indent=4, ensure_ascii=False)
-            #f2.write(put) 
             result += put
             if linecount!=len(text):
-                #f2.write(",\n")
-                result += ",\n"
+                result += ","
     result += "]\n}"
-    #f2.close()
-    #f.close()
-    print(linecount,"line(s) of record transfered.")
-    print("Segmentation Finish.")
-    return result
+    #print(linecount,"line(s) of record transfered.")
+    #print("Segmentation Finish.")
+    return json.dumps(json.loads(result), indent=4)
