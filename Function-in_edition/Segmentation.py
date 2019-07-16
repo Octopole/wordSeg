@@ -29,7 +29,6 @@ Tprereqlist = [r'T', r't', r'厚', r'厚度', r'THK', r'THICK']
 Tconnectorlist = [r'', r':', r'=']
 Tunitlist = [r'mm', r'MM', r't', r'T']
 TSOWlist = [r"THICKNESS", r"THICK"]
-""" r'椭圆形', r'八角垫', r'八角形', r'oval',  """
 #PN matching
 PNSOWlist = [r'PN[0-9]+', r"CL[0-9]+", r"[0-9]+LB", r"CLASS[0-9]+", r"Class[0-9]+"]
 #DN matching
@@ -311,34 +310,92 @@ def listtodic(rawlist, lc):
             else:
                 preword = ""
             if not i in out:
+                labelck = 0 
                 if counter != len(rawlist)-1:
                     nxtword = rawlist[counter+1]
                 else:
                     nxtword = ""
                 if isdate(i):
-                    out[i] = 'Time'
-                elif isT(i):
-                    out[i] = 'T'
-                elif isPN(i):
-                    out[i] = 'PN'
-                elif isDN(i):
-                    out[i] = 'DN'
-                elif isNIO(i):
-                    out[i] = 'Nameinorder'
-                elif isSP(i):
-                    out[i] = 'Specifications'
-                elif isName(i):
-                    out[i] = 'Name'
-                elif isSD(i):
-                    out[i] = 'Standard'
-                elif isMA(i):
-                    out[i] = 'Material'
-                elif isFl(i):
-                    out[i] = 'Flange'
-                else:
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'Time'
+                    else:
+                        out[i] = 'Mixed'
+                if isT(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'T'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isPN(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'PN'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isDN(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'DN'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isNIO(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'Nameinorder'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isSP(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'Specifications'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isName(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'Name'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isSD(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'Standard'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isMA(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'Material'
+                    else:
+                        out[i] = 'Mixed'
+                    
+                if isFl(i):
+                    labelck = 1
+                    if not i in out:
+                        out[i] = 'Flange'
+                    else:
+                        out[i] = 'Mixed'
+
+                if labelck == 0:
                     out[i] = "Unlabled"
+            labelck = 0
             counter += 1
     return out
+
+def dictoarray(dic):
+    list_ = []
+    for (k, v) in dic.items():
+        tup = (k, v, )
+        list_.append(tup)
+    return (list_)
 
 def segment(text, dicfile):
     global TSOWlist, NIOSOWlist, PNSOWlist, DNSOWlist,SPSOWlist, NameSOWlist, SDSOWlist, MASOWlist, FlSOWlist
@@ -382,11 +439,13 @@ def segment(text, dicfile):
     result += '{"docs":"",\n"origindatas":['
     linecount = 0
 
+    while '' in text:
+        text.remove('')
+
     for line in text:
         linecount += 1
         line = strQ2B(line)
-        if line[-1] == "\n":
-            line = line[:-1]
+        line = re.sub('\n', '', line)
         result += "\"" + str(line) + "\""
         if linecount != len(text):
             result += ","
@@ -399,7 +458,7 @@ def segment(text, dicfile):
         seg_list = linetolist(line)
         seg_list = wdjoin(seg_list)
         dic = listtodic(seg_list, linecount)
-        #print(dic)
+        dic = dictoarray(dic)
         if len(dic) != 0:
             linecount += 1
             put = json.dumps(dic, indent=4, ensure_ascii=False)
