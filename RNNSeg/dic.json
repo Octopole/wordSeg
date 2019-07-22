@@ -1,0 +1,22 @@
+{
+    "T": [],
+    "Nameinorder": ["covered", "serratedMetal", "flat", "Gasket", "for", "separator", "safety", "slide", "blind", "value", "IBC", "NC", "DQ", "EC", "FC", "GD", "GE",
+    "KD", "NB", "NF", "NU", "Gasket-IBC", "Gasket-NC", "bar", "Grooced", "metal", "inner", "eyelet", "outer", "insert", "sealing", "face", "bead", "Y", "strainer", "Sightglass", "wound", "Tantalun", "lined", "D型金属缠绕垫",
+    "FIBREGASKET", "Spiral", "S24", "S27", "垫片", "F14", "S22", "SELF", "CENTERING", "RING", "NEOPRENE", "SOIROMETALIC", "STAND", "PIPE",
+    "RUBBUER", "带外环缠绕垫", "八角垫", "石墨垫片", "基本型缠绕垫", "S.W.", "带内环和定位环", "四氟缠绕垫", "RPTFE密封条", "密封环", "顶盖下法兰垫片", "顶盖上法兰垫片", "缠绕垫", "KG30", "pdf28",
+    "盘根", "非金属平垫片", "垫片_无石棉橡胶板", "垫片_非石棉橡胶", "法兰用缠绕式垫片", "柔性石墨缠绕垫", "缠绕垫片", "硫酸钡填充聚四氟乙烯", "0型圈_氟橡胶", "柔性石墨垫片", "垫片_硅橡胶", "增强柔性石墨垫片", "0型圈_全氟橡胶",
+    "金属齿形垫", "金属齿形垫片", "填料", "0型圈_硅橡胶", "0型圈", "包氟", "PTFE垫片", "缠绕垫片","低预紧力", "石墨复合垫", "膨体四氟带", "乙丙橡胶胶垫", "PL", "NBR", "生产支持用垫片", "石墨穿刺垫", "石墨平垫片", "设备法兰垫片",
+    "石墨复合垫片", "上下封头垫片", "大修安全网垫片", "氟缠绕垫低应力", "D型304四氟缠绕垫", "金属包覆垫", "金属缠绕垫", "金属缠绕垫片", "视镜垫片", "弹性四氟带", "D型四氟缠绕垫", "0-ring", "平垫片", "密封垫/石墨穿刺", "封头缠绕垫片",
+    "金属石墨缠绕垫片", "石墨穿刺", "金属", "缠绕/D型", "内外环缠绕垫片", "石墨缠绕垫", "紫铜垫片", "金属垫", "PTFE缠绕垫", "0型圈条", "SPIRAL-WOUND", "金属齿形垫", "无石棉橡胶垫", "非金属垫片", "gkt"],
+    "PN": [],
+    "DN": [],
+    "Specifications": ["G902", "EPDM", "Kempchen", "B7A", "tendon", "TA-Luft", "Approval"],
+    "Name": [],
+    "Flange": [],
+    "Material": ["graphite", "Fluororubber", "PTFE", "Fluoro", "Camprofile", "track-free", "steel", "Gylon", "Style", "layer", "Lap-joint", "Klinger-Sil", "C4400", "MFM", "Aramid", "fibre", "nitrile", "binder",
+    "SOFT", "Graphit", "SS316", "CS", "304", "软铁", "G(Z)", "SS304", "3885", "带内包边", "IRON", "90HB", "MAX", "304-FG-304", "I.R.", "C.R.", "SPEC", "BARIUM", "SULFATE", "FILLER", "RSB", "O.R.", "填充硫酸钡", "硅橡胶", "GRAFOIL", "GRADE", "GHR",
+    "2222", "EXPANDED", "石墨", "1222", "2229", "Mone", "FEP", "FPM", "NON", "ASBESTOS", "SHEET", "00Cr17Ni14Mo2", "碳钢", "D1424", "PDF", "金属包覆层", "填充材料", "外圈", "石墨缠绕", "0Cr18Ni9+PTFE", "1333",
+    "FKM", "ISS", "R4110", "钢带", "凸面", "VITON", "Unigraf", "四氟乙烯", "FG", "橡胶", "Synthenic", "TI+G", "AISI", "GRAFITO", "PARA", "API-601", "SEAT", "COMML", "GRAP."],
+    "Standard": ["CISS", "TSM", "3013", "CS1000-1053", "DIN", "EN", "1514", "1514", "WIN", "WN1000-124", "Novaphit", "silica", "quartz", "Sigraflex", "Universal", "Pro",
+    "stainless-steel", "sus321", "tantalum", "TYPE", "HG", "ASME", "JB", "SH"]
+}
